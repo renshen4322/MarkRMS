@@ -17,3 +17,10 @@ E:\BaiduYunDownload\vidaHouseManageRMS0504早最新\vidaHouseManageRMS\VidaHouse
 E:\BaiduYunDownload\vidaHouseManageRMS0504早最新\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Debug\VidaHouseManage.Entity.csprojResolveAssemblyReference.cache
 E:\BaiduYunDownload\vidaHouseManageRMS0504早最新\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Debug\VidaHouseManage.Entity.dll
 E:\BaiduYunDownload\vidaHouseManageRMS0504早最新\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Debug\VidaHouseManage.Entity.pdb
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Debug\VidaHouseManage.Entity.dll
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Debug\VidaHouseManage.Entity.pdb
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Debug\Newtonsoft.Json.dll
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Debug\Newtonsoft.Json.xml
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Debug\VidaHouseManage.Entity.csprojResolveAssemblyReference.cache
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Debug\VidaHouseManage.Entity.dll
+D:\Work_code\MarkRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Debug\VidaHouseManage.Entity.pdb

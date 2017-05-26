@@ -1,0 +1,212 @@
+body,ul,li,h1,h2,h3,h4,h5,h6{
+    margin:0;
+    padding:0;
+}
+html,body{
+    width:100%;
+    height:100%;
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+body{
+    background:url(../images/login_bg.jpg) no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.allContentBox{
+    width:502px;
+    height:611px;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+}
+.logo{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0px;
+    width:198px;
+    height:46px;
+    margin:0 auto;
+}
+.loginBox{
+    width:501px;
+    height:387px;
+    position:absolute;
+    left:0;
+    right:0;
+    top:90px;
+    margin:0 auto;
+    background:rgba(255,255,255,0.6);
+    border-radius:6px;
+}
+.loginText{
+    display: block;
+    margin-top:28px;
+    font-size:24px;
+    color:#fff;
+    font-family:'微软雅黑';
+    text-align:center;
+}
+.Icon{
+    width:20px;
+    height:20px;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:22px;
+    margin:auto;
+}
+
+ul {
+   padding:0px; margin:0px;
+}
+ ul li {
+    list-style:none;
+    padding-left:80px;
+   
+}
+.userNameGroup{
+    width:358px;
+    height:54px;
+    position:relative;   
+    margin:28px auto;
+    background:#fff;
+    border-radius:6px;
+}
+.userNameGroup .Icon{
+    background: url("../images/user.png");
+}
+.userNameGroup input,.userPasswordGroup input{
+    border:none;
+    width:100%;
+    height:100%;
+    border-radius:6px;
+    outline-color:red;
+    padding-left: 60px;
+    font-size:16px;
+    font-family: '微软雅黑';
+    box-sizing: border-box;
+}
+.userPasswordGroup{
+    width:358px;
+    height:54px;
+    position:relative;
+    margin:0 auto;
+    background:#fff;
+    border-radius:6px;
+}
+.userPasswordGroup .Icon{
+    background: url("../images/lock.png");
+}
+.rmPassword{
+    width:358px;
+    margin:0 auto;
+    margin-top:15px;
+    color:#fff;
+    font-size:14px;
+    font-family: '黑体';
+    text-align: right;
+}
+.rmPassword::after{
+    clear:both;
+    content:'';
+    display:block;
+}
+.textTip{
+    float:right;
+    margin:1px 15px 0 0;
+}
+.checkBox{
+    float:right;
+}
+.rmPassword input{
+    display:none;
+}
+.checkBox label{
+    display: inline-block;
+    width: 18px;
+    height:18px;
+    border-radius: 2px;
+    background:#fff;
+    position:relative;
+    cursor:pointer;
+}
+.label_on::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:6px;
+    margin:auto;
+    width:12px;
+    height:7px;
+    border-left:2px solid red;
+    border-bottom:2px solid red;
+    -ms-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+    transform: rotate(-45deg);
+}
+
+.loginBtn{
+    width:358px;
+    height:54px;
+    margin:0 auto;
+}
+.loginBtn input{
+    width:100%;
+    height:100%;
+    border:none;
+    background:#F0375B;
+    outline:none;
+    font-size: 20px;
+    border-radius:6px;
+    margin-top:40px;
+    font-family: '黑体';
+    color:#fff;
+    cursor: pointer;
+}
+.loginBtn input:active{
+    border:1px solid #fff;
+    background:#BD4E65;
+}
+.copyRight{
+    color:#fff;
+    position:absolute;
+    left:0;
+    right:0;
+    margin:auto;
+    bottom:80px;
+    font-size: 16px;
+    width:358px;
+    text-align: center;
+}
+.aboutusTip{
+    color:#fff;
+    font-size:26px;
+    position:absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+    margin:auto;
+    text-align:center;
+}
+.aboutusTip>span{
+    display: inline-block;
+    padding-right:35px;
+    border-right: 2px solid #fff;
+}
+.aboutusTip a{
+    text-decoration: none;
+    font-family:'Arial';
+    padding-left: 30px;
+    font-size:24px;
+    color:#fff;
+}
+.aboutusTip a:hover{
+    text-decoration: underline;
+}
+

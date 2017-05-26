@@ -1,0 +1,77 @@
+﻿@model VidaHouseManage.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+@{
+    HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get("COOKIE_NAME_FOR_USER");
+    ViewData["username"] = (cookie == null ? "" : cookie["COOKIE_USER_NAME"].ToString().Trim());
+    ViewData["userpass"] = (cookie == null ? "" : cookie["COOKIE_USER_PASS"].ToString().Trim());
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>登录</title>
+    <link rel="stylesheet" href="~/css/login.css">
+   
+</head>
+<body>
+    <div class="allContentBox">      
+       @using (Html.BeginForm("Login", "Account",FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+       {
+            <div class="logo">
+                <img src="~/images/logo.png" alt="">
+            </div>
+            <div class="loginBox">
+                <span class="loginText">用户登录</span>                
+                <span>@Html.AntiForgeryToken()</span>
+                <span style="color:red; font-size:14px; display:block;">
+                    @Html.ValidationSummary(true)
+                </span>                        
+                <div class="userNameGroup">                   
+                    <span class="Icon"></span>                    
+                    @Html.TextBoxFor(m => m.UserName, new { @Value = ViewData["username"], @class = "form-control", @placeholder = "请输入用户名" })
+                    <br /><span style="color:red;font-size:14px;">@Html.ValidationMessageFor(m => m.UserName)</span>
+                </div>
+                <div class="userPasswordGroup">
+                    <span class="Icon"></span>
+                    @Html.PasswordFor(m => m.Password, new { @Value = ViewData["userpass"], @class = "form-control", @placeholder = "请输入密码" })
+                    <br /><span style="color:red;font-size:14px;">@Html.ValidationMessageFor(m => m.Password)</span>
+                </div>
+                <div class="rmPassword">
+                    <div class="checkBox">                        
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @id = "RememberMe" })
+                        <label for="RememberMe"></label>
+                    </div>
+                    <div class="textTip">记住我?</div>
+                </div>
+                <div class="loginBtn">
+                    <input type="submit" value="登录">
+                </div>
+            </div>
+            <div class="copyRight">
+                <span>2017 - Matrix Admin. Brought to you by Alpha</span>
+            </div>
+            <div class="aboutusTip">
+                <span>VidaHouseManage</span>
+                <a href="/Home/Contact">关于</a>
+            </div>
+       }
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery.min.js"></script>
+<script type="text/javascript">
+        $(function () {
+            $('#RememberMe').click(function () {               
+                if ($('#RememberMe').attr("checked")){
+                    $('.checkBox label').addClass('label_on');
+                } else {
+                    $('.checkBox label').removeClass('label_on');
+                }
+            })
+    })
+</script>

@@ -1,0 +1,7 @@
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Release\VidaHouseManage.Entity.dll
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Release\VidaHouseManage.Entity.pdb
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Release\Newtonsoft.Json.dll
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\bin\Release\Newtonsoft.Json.xml
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Release\VidaHouseManage.Entity.dll
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Release\VidaHouseManage.Entity.pdb
+D:\repo\vidaHouseManageRMS\VidaHouseManage.RMS\VidaHouseManage.Entity\obj\Release\VidaHouseManage.Entity.csprojResolveAssemblyReference.cache

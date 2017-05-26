@@ -1,0 +1,65 @@
+﻿/*分页*/
+.paging {
+    height: 35px;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+    .paging a {
+        border: 1px solid #dddcdb;
+        border-radius: 2px;
+        color: #2e2e2e;
+        padding: 4px 12px;
+        margin-right: 5px;
+    }
+
+        .paging a:hover, .paging a.on {
+            background: #e8e8e8;
+            color: #2e2e2e;
+        }
+
+        .paging .hover, .paging a.hover:hover {
+            border: 1px solid #F0375B;
+            background: #F0375B;
+            color: #fff;
+        }
+
+.pageInputTxt {
+    border: 1px solid #dddcdb;
+    height: 26px;
+    margin: 0 3px;
+    text-align: center;
+    width: 30px;
+}
+
+#pageList {
+    text-align: center;
+}
+
+/*修改分页样式*/
+#pager a {
+    color: #2e2e2e;
+    text-decoration:none;
+    display:inline-block;
+    border: 1px solid #dddcdb;
+    border-radius: 2px;
+    color: #2e2e2e;
+    padding: 4px 12px;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+#pager a:hover{
+    background: #e8e8e8;
+}
+
+
+#pager tr td {
+    text-align: center;
+}
+
+#pager .newPager,#pager .newPager:hover {
+    border: 1px solid #F0375B;
+    background: #F0375B;
+    color: #fff;
+}

@@ -1,0 +1,198 @@
+body,ul,li,h1,h2,h3,h4,h5,h6{
+    margin:0;
+    padding:0;
+}
+html,body{
+    width:100%;
+    min-width: 1200px;
+    height:100%;
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+.top{
+    width:100%;
+    height: 100px;
+    line-height:100px;
+    color:#fff;
+    background:#222B34;
+}
+.top a {
+    color:#fff;
+    text-decoration:none;
+}
+.topContent{
+    padding:0 18%;
+    box-sizing:border-box;
+}
+.topContent span:first-child{
+    font-size:28px;
+    float: left;
+}
+.topContent span:last-child{
+    font-size:28px;
+    float: right;
+    font-family: "Arial";
+}
+.middleContent1{
+    width:100%;
+    height:570px;
+    padding:0 18%;
+    box-sizing:border-box;
+    overflow: hidden;
+    background:#F2F5FA;
+}
+.middleContent1 h2{
+    text-align: center;
+    margin-top:98px;
+}
+.middleContent1 .iconBox{
+    width:100%;
+    margin-top: 80px;
+    display:table;
+}
+.middleContent1 .iconBox>div{
+    display:table-cell;
+    text-align: center;
+}
+.middleContent1 .iconBox>div a {
+    text-decoration: none;
+    font-size: 20px;
+    color:black;
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+.middleContent1 .iconBox>div a:hover{
+    color:#F0375B;
+}
+.middleContent1 .iconBox .icon{
+    width:200px;
+    height:200px;
+    margin:0 auto;
+    margin-bottom: 48px;
+    border-radius:50%;
+    background-color:#CCCCCC;
+    background-image: url("../images/icon.png");
+    background-repeat: no-repeat;
+}
+.middleContent1 .iconBox>div:nth-child(1) .icon{
+    background-position:-49px 27px;
+}
+.middleContent1 .iconBox>div:nth-child(2) .icon{
+    background-position:-230px 20px;
+}
+.middleContent1 .iconBox>div:nth-child(3) .icon{
+    background-position:-392px 25px;
+}
+.middleContent1 .iconBox .icon:hover{
+    background-color:#F0375B;
+}
+.middleContent2{
+    padding:0 15% 80px 15%;
+    font-size: 14px;
+    box-sizing:border-box;
+    overflow: hidden;
+}
+.middleContent2 h2{
+    text-align: center;
+    margin-top:80px;
+    margin-bottom:80px;
+}
+.middleContent2_content ul{
+    width:100%;
+    display: table;
+}
+.middleContent2_content ul:nth-child(1){
+    margin-bottom: 60px;
+}
+.middleContent2_content ul li {
+    display:table-cell;
+    vertical-align: middle;
+    width:33.33%;
+    line-height: 30px;
+}
+.middleContent2_content ul li i{
+    float:left;
+    margin-right:15px;
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+    background-image: url("../images/gather.png");
+}
+.middleContent2_content ul:nth-child(1) li:nth-child(1) i{
+    background-position: -220px 344px;
+}
+.middleContent2_content ul:nth-child(1) li span{
+    font-size: 16px;
+}
+.middleContent2_content ul:nth-child(1) li:nth-child(1) a{
+    text-decoration:none;
+    font-size: 16px;
+    color:black;
+}
+.middleContent2_content ul:nth-child(1) li:nth-child(3) a{
+    float:left;
+    width:76px;
+    height:22px;
+    margin-top:2px;
+    margin-right:8px;
+}
+.middleContent2_content ul:nth-child(1) li:nth-child(1) a:hover{
+    color:#F0375B;
+}
+.middleContent2_content ul:nth-child(1) li:nth-child(2) i{
+    background-position: -160px 344px;
+}
+.middleContent2_content ul:nth-child(1) li:nth-child(3) i{
+    background-position: -220px 301px;
+}
+.middleContent2_content ul:nth-child(2) li:nth-child(1) i{
+    background-position: -160px 301px;
+}
+.middleContent2_content ul:nth-child(2) li:nth-child(2) i{
+    background-position: -160px 387px;
+}
+.middleContent2_content ul:nth-child(2) li:nth-child(3) i{
+    margin-top: 4px;
+    background-position: -220px 387px;
+}
+.middleContent2_content ul li span{
+    float:left;
+}
+footer{
+    width:100%;
+    height:190px;
+    overflow: hidden;
+    background:#222B34;
+    text-align: center;
+    color:#fff;
+}
+footer>ul{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+footer>ul ~span{
+    display: block;
+}
+.copyRight{
+    margin-bottom: 10px;
+}
+footer>ul li{
+    display: inline-block;
+}
+footer>ul li:nth-child(1){
+    padding-right: 50px;
+}
+footer>ul li:nth-child(2){
+    padding:0 50px;
+    border-left:2px solid #fff;
+    border-right:2px solid #fff;
+}
+footer>ul li:nth-child(3){
+    padding-left: 50px;
+}
+footer>ul li a{
+    text-decoration: none;
+    color:#fff;
+}
+
+
+
+

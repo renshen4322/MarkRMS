@@ -1,0 +1,162 @@
+﻿@using VidaHouseManage.Entity;
+@{
+    ViewBag.Title = "资源管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@section headers
+{
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+    <link href="~/css/folder.css" rel="stylesheet" />
+   
+}
+
+    <div class="left_nav">
+        <div class="logo">
+            <img src="/images/logo.png" alt="">
+        </div>
+        <ul class="nav_list">
+            <li>
+                <i></i>
+                <span><a href="/Products/Index">物品</a></span>
+                <div class="activeArrow"></div>
+            </li>
+
+            <li>
+                <i></i>
+                <span><a href="/Materials/Index">材质</a></span>
+                <div class="activeArrow"></div>
+            </li>
+            <li>
+                <i></i>
+                <span><a href="/Schemes/Index">方案</a></span>
+                <div class="activeArrow"></div>
+            </li>
+            <li class="currentActive">
+                <i></i>
+                <span><a href="/Upload/Index">资源</a></span>
+                <div class="activeArrow"></div>
+            </li>
+
+            <li>
+                <i></i>
+                <span><a href="/Organization/OrganizationList">组织</a></span>
+                <div class="activeArrow"></div>
+            </li>
+
+            <li>
+                <i></i>
+                <span><a href="/Member/MemberList">成员</a></span>
+                <div class="activeArrow"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="right_content">
+        <div class="top">
+            <span>后台管理系统</span>
+            <a href="/Account/LogOff">注销</a>
+            <div class="user">
+                <i></i>
+                <span>@Session["UserName"].ToString()</span>
+            </div>
+        </div>
+        <div class="menuBar">
+            <div class="modChange">
+                <span class="details currentActive"></span>
+                <span class="list "></span>
+            </div>
+            <input type="hidden" value="@ViewBag.ViewPlacement" id="HidderViewPlacement" />
+        </div>
+        @{
+            Dictionary<string, string> EntityList = ViewBag.DictInfo;
+        }
+        <div class="content_details" style="display:block">
+            <main>              
+                <ol class='grid g_test' id='frame'>
+                    @if (EntityList != null)
+                    {
+                        foreach (var item in EntityList)
+                        {
+                            <li class='frame'>
+                                <div class='inset'>
+                                    <div class="resouceImg"><a href="/Upload/ShowUpload?strSlug=@item.Key+&strView=@ViewBag.ViewPlacement"><img src="~/images/folder_img.png" /></a></div>
+                                    <div class='dicValue'>
+                                        <a href="/Upload/ShowUpload?strSlug=@item.Key+&strView=@ViewBag.ViewPlacement">@item.Value</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                        }
+                    }
+                </ol>
+
+            </main>
+        </div>
+        <div class="content_lists" style="display:none">          
+            <ul class="r_listInfo">
+                @if (EntityList != null)
+                {
+                    foreach (var item in EntityList)
+                    {
+                                <li>
+                                    <a href="/Upload/ShowUpload?strSlug=@item.Key+&strView=@ViewBag.ViewPlacement">
+                                        <div class="folder_icon"></div>
+                                        <span>@item.Value</span>
+                                    </a>
+                                </li>
+                    }
+                }             
+            </ul>           
+        </div>       
+        <div class="footer">
+            <span>2017 - Matrix Admin. Brought to you by alpha</span>
+        </div>
+    </div>
+
+
+    @section footers{
+        <script src="~/Scripts/prefixfree.min.js"></script>
+        <script src="~/Scripts/jquery-confirm.js"></script>
+        <script src="~/Scripts/jquery.alerts.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('.modChange span').on('click', function () {
+                    if ($(this).hasClass('list')) {
+                        $(this).addClass("currentActive");
+                        $('.modChange .details').removeClass('currentActive');
+                        $('#HidderViewPlacement').val("2");
+                        $('.content_details').css("display", "none");
+                        $(".content_lists").css("display", "block");
+                        //location.href = "/Upload/Index?strView=" + 2;
+                    } else if ($(this).hasClass('details')) {
+                        $('.modChange .list').removeClass('currentActive');
+                        $(this).addClass("currentActive");
+                        $('#HidderViewPlacement').val("1");
+                        $('.content_details').css("display", "block");
+                        $(".content_lists").css("display", "none");
+                        //location.href = "/Upload/Index?strView=" + 1;
+                    }
+
+                });
+
+                var _viewInfo = $('#HidderViewPlacement').val();
+                if (_viewInfo == "1") {
+                    $('.modChange .list').removeClass('currentActive');
+                    $('.modChange .details').addClass("currentActive");                   
+                    $('.content_details').css("display", "block");
+                    $(".content_lists").css("display", "none");
+
+                } else {
+                    $('.modChange .list').addClass("currentActive");
+                    $('.modChange .details').removeClass('currentActive');                    
+                    $('.content_details').css("display", "none");
+                    $(".content_lists").css("display", "block");
+                }
+
+            })
+
+
+        </script>
+    }

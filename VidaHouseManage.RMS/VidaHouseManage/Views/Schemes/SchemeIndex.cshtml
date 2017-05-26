@@ -1,0 +1,479 @@
+﻿@using VidaHouseManage.Entity;
+@{
+    ViewBag.Title = "方案管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var _viewCut = ViewBag.ViewCutInfo;
+}
+@section headers
+{
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+    <link href="~/css/resources.css" rel="stylesheet" />
+    <link href="~/css/page.css" rel="stylesheet" />
+}
+<div class="left_nav">
+    <div class="logo">
+        <img src="/images/logo.png" alt="">
+    </div>
+    <ul class="nav_list">
+        <li>
+            <i></i>
+            <span><a href="/Products/Index">物品</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li>
+            <i></i>
+            <span><a href="/Materials/Index">材质</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li class="currentActive">
+            <i></i>
+            <span><a href="/Schemes/Index">方案</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li>
+            <i></i>
+            <span><a href="/Upload/Index">资源</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li>
+            <i></i>
+            <span><a href="/Organization/OrganizationList">组织</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li>
+            <i></i>
+            <span><a href="/Member/MemberList">成员</a></span>
+            <div class="activeArrow"></div>
+        </li>
+    </ul>
+</div>
+<div class="right_content">
+    <div class="top">
+        <span>后台管理系统</span>
+        <a href="/Account/LogOff">注销</a>
+        <div class="user">
+            <i></i>
+            <span>@Session["UserName"].ToString()</span>
+        </div>
+    </div>
+    <input type="hidden" value="@ViewBag.OrderInfo" id="HiddenOrderPlacement" />
+    <input type="hidden" value="@ViewBag.ViewCutInfo" id="HidderViewPlacement" />
+    <div class="menuBar">
+        <div class="OrderByInfo">
+            <input class="TabOrderBy" id="TabOrderBy" name="orderby" placeholder="排序字段" type="text" value="@ViewBag.OrderByInfo" />
+        </div>
+        <div class="catalogue">
+            <select name="order" id="TabOrder" style="width:70px;">
+                <option value="1">升序</option>
+                <option value="2" selected="selected">降序</option>
+            </select>
+        </div>
+        <div class="modChange">
+            <span class="details currentActive"></span>
+            <span class="list "></span>
+        </div>
+        <div class="search">
+            <input type="text" id="TabKeyword" placeholder="搜索关键字" value="@ViewBag.KeywordInfo">
+            <span class="icon"></span>
+        </div>
+    </div>
+    @{
+        PagerQuery<PagerInfo, IList<SchemeModel>> EntityList = ViewBag.DataList;
+        EntityList.Pager.ViewCut = _viewCut;
+    }
+    <div class="content_details" style="display:block">
+        @if (EntityList != null)
+        {
+            <ul class="grid_detail">
+                @foreach (var item in EntityList.EntityList)
+                {
+                    <li>
+                        <div class="top">
+                            <img src="@item.images" alt="@item.id" title="@item.name">
+                            <label class="lbllist" for="@item.id"></label>
+                            <input type="checkbox" name="remarkItem" value="@item.id" id="@item.id">
+                        </div>
+                        <div class="tip">
+                            @item.name
+                        </div>
+                        <div class="middle">
+                            <div>
+                                <span class="userImg">
+                                    <i></i>
+                                    <span>@item.sceneName</span>
+                                </span>
+                                <span>版本号:@item.revision</span>
+                            </div>
+                            <div>
+                                <span class="favorite">
+                                    <i></i>
+                                    <span>@item.collectedNumber</span>
+                                </span>
+                                <span class="time">
+                                    <i></i>
+                                    <span>@item.createdUtc</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            @if (item.isShared == false)
+                            {
+                                <div class="publish" jet="@item.id">分享</div>
+                            }
+                            else
+                            {
+                                <div class="cancelpublish" jet="@item.id">取消分享</div>
+                            }
+                            <div class="delete" jet="@item.id">删除</div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+    <div class="content_lists" style="display:none">
+        @if (EntityList != null)
+        {
+            <div class="ul_box">
+                <ul>
+                    @foreach (var item in EntityList.EntityList)
+                {
+                        <li>
+                            <label class="lbllist" for="@item.id"></label>
+                            <input type="checkbox" name="remarkItem" value="@item.id" id="@item.id">
+                            <div class="imgInfo">
+                                <img src="@item.images" alt="">
+                            </div>
+                            <div class="infoBox">
+                                <span class="idNum">@item.name</span>
+                                <span class="favorite">
+                                    <i></i>
+                                    <span>@item.collectedNumber</span>
+                                </span>
+                                <span class="version">版本号：@item.revision</span>
+                                <span class="publishState">分享：@item.isShared</span>
+                                <span class="userName">
+                                    <i></i>
+                                    <span>@item.sceneName</span>
+                                </span>
+                                <span class="time">
+                                    <i></i>
+                                    <span>@item.createdUtc</span>
+                                </span>
+                            </div>
+                            <div class="description">
+                                <p>描述：@item.description</p>
+                            </div>
+                            <div class="buttons">
+                                @if (item.isShared == false)
+                                {
+                                    <div class="publish" jet="@item.id">分享</div>
+                                }
+                                else
+                                {
+                                    <div class="cancelpublish" jet="@item.id">取消分享</div>
+                                }
+                                <div class="delete" jet="@item.id">删除</div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="base_bottom">
+        @if (EntityList != null)
+        {
+            <div style="font-size:14px;" class="pageInfo">
+                @Html.Raw(Html.Pager("pager", EntityList.Pager.CurrentPageIndex, EntityList.Pager.PageSize, EntityList.Pager.RecordCount, "table-center", PageMode.Numeric, "/Schemes/Index", EntityList.Pager.ViewCut))
+                <input type="hidden" name="currPage" id="currPage" value="@EntityList.Pager.CurrentPageIndex" />
+                <input type="hidden" name="needDelIds" id="needDelIds" value="" />
+            </div>
+            <div class="selectAll">
+                <div>
+                    <input type="checkbox" style="display:none;" id="allselect">
+                    <label class="" for="allselect">
+                    </label>
+                    <span>全选</span>
+                    <span class="delete">删除</span>
+                </div>
+            </div>
+            <div class="footer">
+                <span>@DateTime.Now.Year -- Matrix Admin. Brought to you by alpha</span>
+            </div>
+        }
+    </div>
+
+</div>
+<div class="modal" id="mymodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提示！</h4>
+            </div>
+            <div class="modal-body">
+                <p><span id="output" style="font-size: 24px; color:aqua;">请等待……</span></p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section footers{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/transition.js"></script>
+    <script src="~/Scripts/modal.js"></script>
+    <script src="~/Scripts/jquery-confirm.js"></script>
+    <script src="~/Scripts/jquery.alerts.js"></script>
+    <script type="text/javascript">
+        var ids = "";
+        var selArr = [];
+        $(function () {
+            var placement = $('#HiddenOrderPlacement').val();
+            $('#TabOrder option').each(function () {
+                if ($(this).val() == placement) {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+
+
+            $('.modChange span').on('click', function () {
+                if ($(this).hasClass('list')) {
+                    $(this).addClass("currentActive");
+                    $('.modChange .details').removeClass('currentActive');
+                    $('#HidderViewPlacement').val("2");
+                    $('.content_details').css("display", "none");
+                    $(".content_lists").css("display", "block");
+
+                } else if ($(this).hasClass('details')) {
+                    $('.modChange .list').removeClass('currentActive');
+                    $(this).addClass("currentActive");
+                    $('#HidderViewPlacement').val("1");
+                    $('.content_details').css("display", "block");
+                    $(".content_lists").css("display", "none");
+
+                }
+
+            });
+
+            $('.search span').click(function () {
+                var tabindex = $("#currPage").val();
+                var tabKeyWord = $('#TabKeyword').val();
+                var tabOrderBy = $("#TabOrderBy").val();
+                var tabOrder = $('#TabOrder').val();
+                var viewInfo = $('#HidderViewPlacement').val();
+                location.href = "/Schemes/Index?strOrderBy=" + tabOrderBy + "&strOrder=" + tabOrder + "&strKeyWord=" + tabKeyWord + "&strView=" + viewInfo + "&PageIndex=" + tabindex;
+            })
+
+            $(".publish").click(function () {
+                $('#mymodal').modal('show');
+                var id = $(this).attr("jet");
+                PublicMethod(id);
+            });
+            $(".cancelpublish").click(function () {
+                $('#mymodal').modal('show');
+                var id = $(this).attr("jet");
+                CancelPublicMethod(id);
+            });
+            $(".bottom .delete,.buttons .delete").click(function () {
+                var id = $(this).attr("jet");
+                Delete(id);
+            });
+            $('.selectAll .delete').click(function () {
+                // alert($("#needDelIds").val());
+                delAll();
+            });
+
+
+            $('#allselect').click(function () {
+
+                if (this.checked == true) {
+                    ids = "";
+                    $('.selectAll label').addClass('checkedActive');
+                    $("input[name='remarkItem']").each(function () {
+                        this.checked = true;
+                        selArr.push($(this).val());
+                        $(this).parent().find('label').addClass('checkedActive');
+                    });
+                    for (var i = 0; i < selArr.length; i++) {
+                        for (var j = i + 1; j < selArr.length; j++) {
+                            if (selArr[i] == selArr[j]) {
+                                selArr.splice(j, 1);
+                                j--;
+                            }
+                        }
+                    }
+                    ids = (',' + selArr.join(","));
+                    $("#needDelIds").val(ids)
+                    //alert($("#needDelIds").val());
+                } else {
+                    $('.selectAll label').removeClass('checkedActive');
+                    $("input[name='remarkItem']").each(function () {
+                        this.checked = false;
+                        $(this).parent().find('label').removeClass('checkedActive');
+                        $("#needDelIds").val("");
+                        ids = "";
+                    });
+                    //alert($("#needDelIds").val());
+                }
+            })
+
+            $(".lbllist").on('click', function () {
+
+                if ($(this).hasClass('checkedActive')) {
+                    $(this).removeClass('checkedActive');
+                    $(this).next().checked = false;
+                    $("#needDelIds").val("");
+                } else {
+                    $("#needDelIds").val("");
+                    $(this).addClass('checkedActive');
+                    $(this).next().checked = true;
+                    ids += (',' + $(this).next().val());
+                    $("#needDelIds").val(ids);
+                }
+                //alert($("#needDelIds").val());
+
+            })
+
+        })
+
+        function PublicMethod(id) {
+            //$.confirm({
+            //    title: '提示!',
+            //    content: '确定分享' + id + '吗？',
+            //    confirm: function () {
+            $.get("@Url.Action("ShardInfo")", { "id": id }, function (data) {
+
+                if (data == -2) {
+                    $.alert({
+                        title: "提示",
+                        content: "分享失败或无权限!",
+                    });
+                    setTimeout(function () {
+                        $('#mymodal').modal('hide');
+                        window.location.reload();
+                    }, 1500);
+                }
+                if (data == 1) {
+                    $.alert({
+                        title: "提示",
+                        content: "分享" + id + "成功！",
+                    });
+                    setTimeout(function () {
+                        $('#mymodal').modal('hide');
+                        window.location.reload();
+                    }, 1000);
+                }
+
+            });
+        }
+        //,
+        //    cancel: function () {
+        //        $('.jconfirm-box-container').hide();
+        //        //window.location.reload();
+        //    }
+        //});
+        //}
+
+        function CancelPublicMethod(id) {
+            //$.confirm({
+            //    title: '提示!',
+            //    content: '确定取消分享' + id + '吗？',
+            //    confirm: function () {
+            $.get("@Url.Action("CancelShardInfo")", { "id": id }, function (data) {
+
+                if (data == -2) {
+                    $.alert({
+                        title: "提示",
+                        content: "取消分享失败或无权限！",
+                    });
+                    setTimeout(function () {
+                        $('#mymodal').modal('hide');
+                        window.location.reload();
+                    }, 1000);
+                }
+
+                if (data == 1) {
+                    $.alert({
+                        title: "提示",
+                        content: "取消分享" + id + "成功！",
+                    });
+                    setTimeout(function () {
+                        $('#mymodal').modal('hide');
+                        window.location.reload();
+                    }, 1000);
+                }
+            });
+        }
+        //,
+        //        cancel: function () {
+        //            $('.jconfirm-box-container').hide();
+        //            //window.location.reload();
+        //        }
+        //    });
+        //}
+        function Delete(id) {
+            $.confirm({
+                title: '提示!',
+                content: '确定删除' + id + '吗？',
+                confirm: function () {
+                    $.get("@Url.Action("Delete")", { "id": id }, function (data) {
+                        if (data == -1) {
+                            $.alert({
+                                title: "提示",
+                                content: "不存在此物品！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        }
+                        if (data == -2) {
+                            $.alert({
+                                title: "提示",
+                                content: "删除失败或无权限！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        }
+                        if (data == 1) {
+                            window.location.reload();
+                        }
+
+                    });
+                },
+                cancel: function () {
+                    $('.jconfirm-box-container').hide();
+                }
+            });
+        }
+
+        function delAll() {
+            $.confirm({
+                title: '提示!',
+                content: '确定删除选中行吗？',
+                confirm: function () {
+                    var tabindex = $("#currPage").val();
+                    var needDelIds = $("#needDelIds").val();
+                    var viewInfo = $('#HidderViewPlacement').val();
+                    location.href = "/Schemes/DeleteSelect?needDelIds=" + needDelIds + "&strView=" + viewInfo + "&pageIndex=" + tabindex;
+                },
+                cancel: function () {
+                    $('.jconfirm-box-container').hide();
+                    $('.selectAll label').removeClass('checkedActive');
+                    $("input[name='remarkItem']").each(function () {
+                        this.checked = false;
+                        $(this).parent().find('label').removeClass('checkedActive');
+
+                    });
+                    $("#needDelIds").val("");
+                    ids = "";
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,330 @@
+.managePopUp{
+    width:843px;
+    height:616px;
+    
+}
+.modal-dialog{
+    width:843px;
+    height:616px;
+    border:1px solid transparent;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: -90px;
+    bottom: 0;
+    margin: auto;
+}
+.modal-header{
+    width: 95%;
+    padding: 22px 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    background: #fff;
+    color: #F13E60;
+    border-bottom: 1px solid #F4F4F4;
+}
+.closeBtn{
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    bottom: -73px;
+    cursor: pointer;
+}
+.modal-body{
+    width:95%;
+    margin:0 auto;
+    display: table;
+}
+.modal-body>div{
+    float:left;
+}
+.contentL{
+    width:65%;
+    height:383px;
+    border-right:1px solid #EBEBEB;
+}
+.contentL>ul{
+    margin:0;
+    padding:0;
+}
+.contentL>ul li{
+    list-style: none;
+    font-size:18px;
+    margin-bottom:35px;
+    text-align: left;
+    color:#BDBDBD;
+    position:relative;
+}
+.contentL>ul li span{
+    margin-right:20px;
+}
+.contentL>ul li input{
+    width:373px;
+    height:60px;
+    color: #F13E60;
+    font-size: 20px;
+    outline: none;
+    padding-left: 25px;
+    border:1px solid #E3E3E3;
+    border-radius: 6px;
+}
+
+.inputError {
+     border:1px solid #F0375B !important;
+
+}
+.errorTip{
+    position: absolute;
+    bottom: -26px;
+    left: 99px;
+    color:#F13E60;
+}
+
+.contentR{
+    width:35%;
+    height:383px;
+    overflow: auto;
+}
+.contentR>ul{
+    margin:0;
+    padding:0;
+}
+.contentR>ul li{
+    list-style: none;
+    padding-left:30px;
+    width:100%;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color:#CCCCCC;
+}
+.checkedActive{
+    border:1px solid #F0375B!important;
+}
+.checkedActive ~span{
+    color:#F0375B;
+}
+.checkedActive::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 6px;
+    margin: auto;
+    width: 12px;
+    height: 7px;
+    border-left: 2px solid #F0375B;
+    border-bottom: 2px solid #F0375B;
+    -ms-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+    transform: rotate(-45deg);
+}
+.contentR>ul li>label{
+    display: inline-block;
+    position:relative;
+    vertical-align: middle;
+    margin-right: 20px;
+    margin-bottom: 2px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #CCCCCC;
+}
+.contentR>ul li>input{
+    width:0;
+    height:0;
+    visibility: hidden;
+}
+.submitBtn{
+    width:121px;
+    height:46px;
+    background: #F0375B;
+    color:#fff;
+    font-size: 20px;
+    line-height: 46px;
+    text-align: center;
+    border-radius: 6px;
+    margin:0 auto;
+    margin-top:50px;
+    cursor:pointer;
+}
+.submitBtn:active{
+    background: #C6344D;
+    transform: translateX(1px) translateY(1px);
+}
+.addMembersBtn{
+    display: inline-block;
+    width: 140px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 50px;
+    text-align: left;
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    position: absolute;
+    right: 80px;
+    top:0;
+    bottom:0;
+    margin: auto;
+    cursor: pointer;
+    color:#808080;
+}
+.addMembersBtn>i{
+   display: inline-block;
+    width: 23px;
+    height: 24px;
+    background: url(../images/addMembers.png);
+    position: absolute;
+    top: 3px;
+    left: 18px;
+}
+.content_lists{
+    padding:0;
+}
+.table>thead>tr>th{
+    height:60px;
+    text-align: center;
+    vertical-align: middle;
+    padding:0;
+    line-height: 60px;
+    color:#F15672;
+    font-size: 16px;
+    background:#F6F6F6;
+}
+.table>thead>tr>th>i{
+    font-size: 16px;
+    margin-right:16px;
+
+}
+.table>thead>tr>th>i:before{
+    top: 2px;
+    font-size:18px;
+    margin-right:16px;
+    position: relative;
+}
+.table>tbody>tr>td{
+    padding: 0px;
+    line-height: 60px;
+    font-size: 18px;
+    vertical-align: middle;
+    height: 60px;
+    text-align: center;
+    padding:8px 0;
+}
+.actionBtn{
+    display: block;
+    text-align: center;
+    width:87px;
+    height:32px;
+    cursor:pointer;
+    margin:0 auto;
+    line-height: 32px;
+    background:#e0dfdf;
+}
+.actionBtn:nth-child(1){
+    margin-bottom: 8px;
+}
+.actionBtn:nth-child(2){
+    margin-top: 8px;
+}
+.actionBtn.active{
+    background: #F0375B;
+    color:#fff;
+}
+.organizationBox{
+    width:100%;
+    height:100%;
+    text-align:center;
+}
+.organizationBox>ul{
+    margin-top:30px;
+}
+.organizationBox>ul li{
+    list-style: none;
+    font-size:18px;
+    margin-bottom:35px;
+    text-align: center;
+    color:#BDBDBD;
+    position:relative;
+}
+.organizationBox>ul li .errorTip{
+    left:145px;
+}
+.organizationBox>ul li span{
+    margin-right:20px;
+}
+.organizationBox>ul li input{
+    width:373px;
+    height:60px;
+    color: #F13E60;
+    font-size: 20px;
+    outline: none;
+    padding-left: 25px;
+    border:1px solid #E3E3E3;
+    border-radius: 6px;
+}
+#myOrganization .managePopUp,#myOrganization .modal-dialog{
+    width: 500px;
+    height: 550px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+#myOrganization .managePopUp .modal-body{
+    margin:0 auto;
+    padding:0;
+}
+#myOrganization .managePopUp .submitBtn{
+    margin-top:0;
+}
+.orgInfo{
+    margin: 0px;
+    height: 270px;
+    width: 373px;
+    border: 1px solid rgb(227, 227, 227);
+    border-radius: 6px;
+    resize: none;
+    padding-left: 25px;
+    color: #F13E60;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color: #CCCCCC;
+    font-size:14px;
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color: #CCCCCC;
+    font-size:14px; 
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color: #CCCCCC;
+    font-size:14px;
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color: #CCCCCC;
+    font-size:14px; 
+}
+/*树结构*/
+.managePart{
+    height:100%;
+    background:#fff;
+    /*padding-top:82px;*/
+}
+.ul_box{
+    padding-left:25px;
+    height:calc(100% - 100px);
+    box-sizing:border-box;
+}
+/*添加图标*/
+.CategoryInfo>i{
+    display:inline-block;
+    width:25px;
+    height:21px;
+    position:relative;
+    top:3px;
+    background:url('../images/members.png');
+}

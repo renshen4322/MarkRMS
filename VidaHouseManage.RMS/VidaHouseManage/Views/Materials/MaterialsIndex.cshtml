@@ -1,0 +1,610 @@
+﻿@using VidaHouseManage.Entity;
+@{
+    ViewBag.Title = "材质管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var _viewCut = ViewBag.ViewCutInfo;
+}
+@section headers
+{
+    <link href="~/Content/reset.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+    <link href="~/Content/jstree/style.css" rel="stylesheet" />
+    <link href="~/css/treeResource.css" rel="stylesheet" />
+    <link href="~/css/page.css" rel="stylesheet" />
+}
+<div class="left_nav">
+    <div class="logo">
+        <img src="/images/logo.png" alt="">
+    </div>
+    <ul class="nav_list">
+        <li>
+            <i></i>
+            <span><a href="/Products/Index">物品</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li class="currentActive">
+            <i></i>
+            <span><a href="/Materials/Index">材质</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li>
+            <i></i>
+            <span><a href="/Schemes/Index">方案</a></span>
+            <div class="activeArrow"></div>
+        </li>
+        <li>
+            <i></i>
+            <span><a href="/Upload/Index">资源</a></span>
+            <div class="activeArrow"></div>
+        </li>
+
+        <li>
+            <i></i>
+            <span><a href="/Organization/OrganizationList">组织</a></span>
+            <div class="activeArrow"></div>
+        </li>
+
+        <li>
+            <i></i>
+            <span><a href="/Member/MemberList">成员</a></span>
+            <div class="activeArrow"></div>
+        </li>
+    </ul>
+</div>
+<div class="right_content">
+    <div class="top">
+        <span>后台管理系统</span>
+        <a href="/Account/LogOff">注销</a>
+        <div class="user">
+            <i></i>
+            <span>@Session["UserName"].ToString()</span>
+        </div>
+    </div>
+    <div class="categoryTreeBox">
+        <div class="tree_list" style="font-size:13px">
+            <div id="treeview" class="treeview" style="overflow:auto;vertical-align:top"></div>
+        </div>
+    </div>
+    <input type="hidden" value="@ViewBag.OrderInfo" id="HiddenOrderPlacement" />
+    <input type="hidden" value="@ViewBag.ViewCutInfo" id="HidderViewPlacement" />
+    <div class="menuBar">
+        <div class="OrderByInfo">
+            <input class="TabOrderBy" id="TabOrderBy" name="orderby" placeholder="排序字段" type="text" value="@ViewBag.OrderByInfo" />
+        </div>
+        <div class="CategoryInfo">
+            <input class="TabCategory" id="TabCategory" name="category" placeholder="类别" type="text" value="@(ViewBag.CategoryInfo=="-1"?"":ViewBag.CategoryInfo )" />
+        </div>
+        <div class="catalogue">
+            <select name="order" id="TabOrder" style="width:70px;">
+                <option value="1">升序</option>
+                <option value="2" selected="selected">降序</option>
+            </select>
+        </div>
+        <div class="modChange">
+            <span class="details currentActive"></span>
+            <span class="list "></span>
+        </div>
+        <div class="search">
+            <input type="text" id="TabKeyword" placeholder="搜索关键字" value="@ViewBag.KeywordInfo">
+            <span class="icon"></span>
+        </div>
+    </div>
+    @{
+        PagerQuery<PagerInfo, IList<MaterialModel>> EntityList = ViewBag.DataList;
+        EntityList.Pager.ViewCut = _viewCut;
+
+    }
+    <div class="content_details" style="display:block">
+        @if (EntityList != null)
+        {
+            <ul>
+                @foreach (var item in EntityList.EntityList)
+                {
+                    <li>
+                        <div class="top">
+                            <img class="imgAll" src="@item.images" alt="@item.id" title="@item.description" />
+                            <label class="lbllist" for="@item.id"></label>
+                            <input type="checkbox" name="remarkItem" value="@item.id" id="@item.id">
+                        </div>
+                        <div class="tip">
+                            @item.name
+                        </div>
+                        <div class="middle">
+                            <div>
+                                <span class="userImg">
+                                    <i></i>
+                                    <span>@item.supplierId</span>
+                                </span>
+                                <span>版本号:@item.revision</span>
+                            </div>
+                            <div>
+                                <span class="favorite">
+                                    <i></i>
+                                    <span>@item.collectedNumber</span>
+                                </span>
+                                <span class="time">
+                                    <i></i>
+                                    <span>@item.createdUtc</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="publish" jet="@item.id">发布</div>
+                            <div class="delete" jet="@item.id">删除</div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        <div class="base_bottom">
+            @if (EntityList != null)
+            {
+                <div style="font-size:14px;" class="pageInfo">
+                    @Html.Raw(Html.Pager("pager", EntityList.Pager.CurrentPageIndex, EntityList.Pager.PageSize, EntityList.Pager.RecordCount, "table-center", PageMode.Numeric, "/Materials/Index", EntityList.Pager.ViewCut))
+                    <input type="hidden" name="currPage" id="currPage" value="@EntityList.Pager.CurrentPageIndex" />
+                    <input type="hidden" name="needDelIds" id="needDelIds" value="" />
+
+                </div>
+                <div class="selectAll">
+                    <div>
+                        <input type="checkbox" style="display:none;" id="allselect">
+                        <label class="" for="allselect">
+                        </label>
+                        <span>全选</span>
+                        <span class="delete">删除</span>
+                    </div>
+                </div>
+                <div class="footer">
+                    <span>@DateTime.Now.Year --Matrix Admin. Brought to you by alpha</span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="content_lists" style="display:none">
+        @if (EntityList != null)
+        {
+            <div class="ul_box">
+                <ul>
+                    @foreach (var item in EntityList.EntityList)
+                {
+                        <li>
+                            <label class="lbllist" for="@item.id"></label>
+                            <input type="checkbox" name="remarkItem" value="@item.id" id="@item.id">
+                            <div class="imgInfo">
+                                <img class="imgAll" src="@item.images" alt="@item.id" title="@item.description" />
+                            </div>
+                            <div class="infoBox">
+                                <span class="idNum">@item.id</span>
+                                <span class="type">@item.name</span>
+                                <span class="favorite">
+                                    <i></i>
+                                    <span>@item.collectedNumber</span>
+                                </span>
+                                <span class="version">版本号：@item.revision</span>
+                                <span class="publishState">是否发布：@item.isPublished</span>
+                                <span class="userName">
+                                    <i></i>
+                                    <span>@item.supplierId</span>
+                                </span>
+                                <span class="time">
+                                    <i></i>
+                                    <span>@item.createdUtc</span>
+                                </span>
+                            </div>
+                            <div class="description">
+                                <p>描述：@item.description</p>
+                            </div>
+                            <div class="buttons">
+                                <div class="publish" jet="@item.id">发布</div>
+                                <div class="delete" jet="@item.id">删除</div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        <div class="base_bottom">
+            @if (EntityList != null)
+            {
+                <div style="font-size:14px;" class="pageInfo">
+                    @Html.Raw(Html.Pager("pager", EntityList.Pager.CurrentPageIndex, EntityList.Pager.PageSize, EntityList.Pager.RecordCount, "table-center", PageMode.Numeric, "/Materials/Index", EntityList.Pager.ViewCut))
+                    <input type="hidden" name="currPage" id="currPage" value="@EntityList.Pager.CurrentPageIndex" />
+                    <input type="hidden" name="needDelIds" id="needDelIds" value="" />
+
+                </div>
+                <div class="selectAll">
+                    <div>
+                        <input type="checkbox" style="display:none;" id="allselect">
+                        <label class="" for="allselect">
+                        </label>
+                        <span>全选</span>
+                        <span class="delete">删除</span>
+                    </div>
+                </div>
+                <div class="footer">
+                    <span>@DateTime.Now.Year --Matrix Admin. Brought to you by alpha</span>
+                </div>
+            }
+        </div>
+    </div>
+    <img id="moveImg" style="position:absolute;left:0;top:0; display:none" width="80" height="80" src="" alt="" title="" />
+
+</div>
+
+@section footers{
+    <script src="~/Scripts/jquery-confirm.js"></script>
+    <script src="~/Scripts/jquery.alerts.js"></script>
+    <script src="~/Scripts/jstree/jstree.min.js"></script>
+    <script type="text/javascript">
+        var ids = "";
+        var selArr = [];
+        $(function () {
+
+            var categoryId =@ViewBag.CategoryInfo;
+
+            var parentId=@(ViewBag.ParentCategoryInfo==null ? "-2" : ViewBag.ParentCategoryInfo);
+
+            $("#treeview").jstree({
+                'core': {
+                    'data': {
+                        'url': '/Materials/TreeNodes',
+                        'data': function (data) {
+                            return { 'categoryId': categoryId,'parentId':parentId};
+                        }
+                    }
+                },
+                "multiple": true,
+                "plugins": ["wholerow"]
+            }).bind("activate_node.jstree", function (obj, e) {  //点击事件触发
+                var tabindex = $("#currPage").val();
+                location.href = "/Materials/Index?PageIndex=" + tabindex + "&strCategory=" + e.node.id + "&parentId="+e.node.parent+"&strView=" + $('#HidderViewPlacement').val();
+            });
+
+            var placement = $('#HiddenOrderPlacement').val();
+            $('#TabOrder option').each(function () {
+                if (placement == $(this).val()) {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+
+            $('.modChange span').on('click', function () {
+                if ($(this).hasClass('list')) {
+                    $(this).addClass("currentActive");
+                    $('.modChange .details').removeClass('currentActive');
+                    $('#HidderViewPlacement').val("2");
+                    $('.content_details').css("display", "none");
+                    $(".content_lists").css("display", "block");
+
+                } else if ($(this).hasClass('details')) {
+                    $('.modChange .list').removeClass('currentActive');
+                    $(this).addClass("currentActive");
+                    $('#HidderViewPlacement').val("1");
+                    $('.content_details').css("display", "block");
+                    $(".content_lists").css("display", "none");
+                }
+
+            });
+
+            $('.search span').click(function () {
+                var tabindex = $("#currPage").val();
+                var tabKeyWord = $('#TabKeyword').val();
+                var tabOrderBy = $("#TabOrderBy").val();
+                var tabOrder = $('#TabOrder').find('option:selected').val();
+                var tabCategory = $('#TabCategory').val();
+                var viewInfo = $('#HidderViewPlacement').val();
+
+                var parentId=@(ViewBag.ParentCategoryInfo==null ? "-2" : ViewBag.ParentCategoryInfo);
+
+                location.href = "/Materials/Index?strOrderBy=" + tabOrderBy + "&strCategory=" + tabCategory + "&parentId="+parentId+"&strOrder=" + tabOrder + "&strKeyWord=" + tabKeyWord + "&strView=" + viewInfo + "&PageIndex=" + tabindex;
+            })
+
+            $(".publish").click(function () {
+                var id = $(this).attr("jet");
+                Publish(id);
+            });
+            //$(".cancelpublish").click(function () {
+            //    var id = $(this).attr("jet");
+            //    CancelPublicMethod(id);
+            //});
+            $(".bottom .delete,.buttons .delete").click(function () {
+                var id = $(this).attr("jet");
+                Delete(id);
+            });
+            $('.selectAll .delete').click(function () {
+               //alert($("#needDelIds").val());
+                MultiSelectDel();
+            });
+
+            $('#allselect').click(function () {
+
+                if (this.checked == true) {
+                    ids = "";
+                    $('.selectAll label').addClass('checkedActive');
+                    $("input[name='remarkItem']").each(function () {
+                        this.checked = true;
+                        selArr.push($(this).val());
+                        $(this).parent().find('label').addClass('checkedActive');
+                    });
+                    for (var i = 0; i < selArr.length; i++) {
+                        for (var j = i + 1; j < selArr.length; j++) {
+                            if (selArr[i] == selArr[j]) {
+                                selArr.splice(j, 1);
+                                j--;
+                            }
+                        }
+                    }
+                    ids = (',' + selArr.join(","));
+                    $("#needDelIds").val(ids)
+                    //alert($("#needDelIds").val());
+                } else {
+                    $('.selectAll label').removeClass('checkedActive');
+                    $("input[name='remarkItem']").each(function () {
+                        this.checked = false;
+                        $(this).parent().find('label').removeClass('checkedActive');
+                        $("#needDelIds").val("");
+                        ids = "";
+                    });
+                    //alert($("#needDelIds").val());
+                }
+            })
+
+            $(".lbllist").on('click', function () {
+
+                if ($(this).hasClass('checkedActive')) {
+                    $(this).removeClass('checkedActive');
+                    $(this).next().checked = false;
+                    $("#needDelIds").val("");
+                } else {
+                    $("#needDelIds").val("");
+                    $(this).addClass('checkedActive');
+                    $(this).next().checked = true;
+                    ids += (',' + $(this).next().val());
+                    $("#needDelIds").val(ids);
+                }
+                //alert($("#needDelIds").val());
+
+            })
+
+
+        })
+
+        function Publish(id) {
+            $.confirm({
+                title: '提示!',
+                content: '确定发布' + id + '吗？',
+                confirm: function () {
+                    $.get("@Url.Action("PublishInfo")", { "id": id }, function (data) {
+
+                        if (data == -1) {
+                            $.alert({
+                                title: "提示",
+                                content: "不存在此物品！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500);
+                        }
+                        if (data == -2) {
+                            $.alert({
+                                title: "提示",
+                                content: "发布失败或无权限！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                        if (data == 1) {
+                            $.alert({
+                                title: "提示",
+                                content: "发布成功！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+
+                    });
+                },
+                cancel: function () {
+                    $('.jconfirm-box-container').hide();
+                    //window.location.reload();
+                }
+            });
+        }
+
+        function Delete(id) {
+            $.confirm({
+                title: '提示!',
+                content: '确定删除' + id + '吗？',
+                confirm: function () {
+                    $.get("@Url.Action("Delete")", { "id": id }, function (data) {
+
+                        if (data == -1) {
+                            $.alert({
+                                title: "提示",
+                                content: "不存在此物品！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500);
+                        }
+                        if (data == -2) {
+                            $.alert({
+                                title: "提示",
+                                content: "删除失败或无权限！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                        if (data == 1) {
+                            $.alert({
+                                title: "提示",
+                                content: "删除成功！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+
+                    });
+                },
+                cancel: function () {
+                    $('.jconfirm-box-container').hide();
+                    //window.location.reload();
+
+                }
+            });
+        }
+
+
+        function MultiSelectDel() {
+            $.confirm({
+                title: '提示!',
+                content: '确定删除选中行吗？',
+                confirm: function () {
+                    var tabindex = $("#currPage").val();
+                    var needDelIds = $("#needDelIds").val();
+                    var viewInfo = $('#HidderViewPlacement').val();
+                    location.href = "/Materials/DeleteSelect?needDelIds=" + needDelIds + "&strView=" + viewInfo + "&pageIndex=" + tabindex;
+                },
+                cancel: function () {
+                    $('.jconfirm-box-container').hide();
+                    $('.selectAll label').removeClass('checkedActive');
+                    $("input[name='remarkItem']").each(function () {
+                        this.checked = false;
+                        $(this).parent().find('label').removeClass('checkedActive');
+                    });
+                    $("#needDelIds").val("");
+                    ids = "";
+                }
+            });
+        }
+
+        ///id, 右侧数字id,categoryId 树的id,_nodeText树节点的文字说明，树用的jstree
+        function PutCategory(id, categoryId, _nodeText) {
+            $.confirm({
+                title: '提示!',
+                content: '确定' + id + '修改为：' + _nodeText + '_ 类型吗？',
+                confirm: function () {
+                    $.get("@Url.Action("UpdateCategorie")", { "id": id, "categoryId": categoryId, "nodeText": _nodeText }, function (data) {
+
+                        if (data == -2) {
+                            $.alert({
+                                title: "提示",
+                                content: "更新失败或无权限！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+
+                        if (data == 1) {
+                            $.alert({
+                                title: "提示",
+                                content: "更新成功！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+
+                        if (data == -1) {
+                            $.alert({
+                                title: "提示",
+                                content: "更新无效！",
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    });
+                },
+                cancel: function () {
+                    $('.jconfirm-box-container').hide();
+                    window.location.reload();
+                }
+            });
+        }
+
+        $(function () {
+            $('img').on('dragstart', function (event) { event.preventDefault(); });
+            var bool = false;
+            //图片的拖拽
+            $('.top img, .imgInfo img').mousedown(function (e) {
+                //
+                bool = true;
+                var xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+                var yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+                $('#moveImg').css({
+                    'left': xx + 'px',
+                    'top': yy + 'px'
+                })
+                $('#moveImg').show();
+                $('#moveImg').prop("src", $(this).prop('src'));
+                $('#moveImg').prop("alt", $(this).prop('alt'));
+                $('#moveImg').attr("title", $(this).attr('title'));
+                console.log($('#moveImg').attr("alt"));
+                console.log($('#moveImg').attr("title"));
+            });
+
+            $('body').mousemove(function (e) {
+                if (bool) {
+                    var xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+                    var yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+                    $('#moveImg').css({
+                        'left': xx + 'px',
+                        'top': yy + 'px'
+                    });
+                    isPengzhuang(xx, yy);
+                }
+            });
+            $('body').mouseup(function (e) {
+                bool = false;
+                var _cateId = arrCateId[arrCateId.length - 1];
+                $('#moveImg').hide();
+                if (arrCateId.length != 0 > 0 && _cateId != "undefined") {
+                    PutCategory(arrid[0], arrCateId[arrCateId.length - 1], arrCateText[arrCateText.length - 1]);
+                    //$('#moveImg').hide();
+                }
+
+            });
+
+        })
+
+        //打开树状图
+        var arrid = [];
+        var arrCateId = [];
+        var arrCateText = [];
+
+        function isPengzhuang(x, y) {
+
+            $("#treeview ul li").each(function (k, v) {
+                var ox1 = $(v).offset().left;
+                var oy1 = $(v).offset().top;
+                var ox2 = $(v).offset().left + $(v).width();
+                var oy2 = $(v).offset().top + $(v).height();
+
+                if (x >= ox1 && x <= ox2 && y >= oy1 && y <= oy2) {
+                    console.log($('#moveImg').attr("alt") + "碰撞了" + $(v).attr("id"));
+                    var _nodeText = $(v).find('a').text();
+                    var _nodeParent = $(v).parent('li').find('a').text();
+                    arrid.push($('#moveImg').attr("alt"));
+                    arrCateId.push($(v).attr("id"));
+                    arrCateText.push(_nodeText);
+
+                    $('#treeview').jstree('open_node', arrCateId[arrCateId.length - 1]);
+
+                }
+                else {
+                    $(v).removeAttr("style");
+                    //for (var i = 0; i < arrCateId.length-1; i++) {
+                    //    $('#treeview').jstree('close_node', arrCateId[i]);
+                    //}
+                }
+            })
+
+        }
+    </script>
+}

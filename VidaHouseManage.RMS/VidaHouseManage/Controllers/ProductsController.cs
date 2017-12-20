@@ -11,7 +11,7 @@ using VidaHouseManage.Service;
 
 namespace VidaHouseManage.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private string allproductUrl = "https://api.vidahouse.com/designing/v1.0/Products?";//查询自己所有的物品url
         private string deleteProductUrl = "https://api.vidahouse.com/designing/v1.0/Products/"; //删除固有物品根据id
@@ -23,12 +23,13 @@ namespace VidaHouseManage.Controllers
         private ServerRequestHelper serverHelper = new ServerRequestHelper();
         private ProductService _productService = new ProductService();
         // GET: Products
+
         public ActionResult Index(string strOrderBy = null, string strCategory = "-1", string parentId = "-2", string strOrder = null, string strKeyWord = null, string strView = "1", int PageIndex = 1)
         {
-            if (Session["Token"] == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (Session["Token"] == null)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             ViewBag.ViewCutInfo = strView;
 
             if (!string.IsNullOrEmpty(parentId))

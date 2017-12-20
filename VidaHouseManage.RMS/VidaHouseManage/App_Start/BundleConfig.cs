@@ -51,6 +51,8 @@ namespace VidaHouseManage
                       "~/Content/uniform.css",
                       "~/Content/bootstrap-wysihtml5.css"
                       ));
+
+            
         }
     }
 }

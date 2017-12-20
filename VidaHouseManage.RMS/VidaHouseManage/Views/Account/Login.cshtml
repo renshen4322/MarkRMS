@@ -20,8 +20,9 @@
 </head>
 <body>
     <div class="allContentBox">      
-       @using (Html.BeginForm("Login", "Account",FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+       @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
        {
+        <div>@Html.Partial("~/Views/Shared/_ViewToken.cshtml")</div>
             <div class="logo">
                 <img src="~/images/logo.png" alt="">
             </div>
@@ -31,7 +32,7 @@
                 <span style="color:red; font-size:14px; display:block;">
                     @Html.ValidationSummary(true)
                 </span>                        
-                <div class="userNameGroup">                   
+                <div class="userNameGroup">                       
                     <span class="Icon"></span>                    
                     @Html.TextBoxFor(m => m.UserName, new { @Value = ViewData["username"], @class = "form-control", @placeholder = "请输入用户名" })
                     <br /><span style="color:red;font-size:14px;">@Html.ValidationMessageFor(m => m.UserName)</span>
@@ -48,7 +49,7 @@
                     </div>
                     <div class="textTip">记住我?</div>
                 </div>
-                <div class="loginBtn">
+                <div class="loginBtn">                   
                     <input type="submit" value="登录">
                 </div>
             </div>
@@ -59,6 +60,7 @@
                 <span>VidaHouseManage</span>
                 <a href="/Home/Contact">关于</a>
             </div>
+            
        }
     </div>
 </body>

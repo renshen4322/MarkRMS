@@ -22,6 +22,7 @@ namespace VidaHouseManage.Common
             HttpContext.Current.Session.Remove(strSessionName);
             HttpContext.Current.Session.Add(strSessionName,strValue);
             HttpContext.Current.Session.Timeout = 60;
+           
         }
 
         /// <summary>  

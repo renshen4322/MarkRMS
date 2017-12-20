@@ -11,7 +11,7 @@ using VidaHouseManage.Entity;
 
 namespace VidaHouseManage.Controllers
 {
-    public class SchemesController : Controller
+    public class SchemesController : BaseController
     {
         private string allSchemeUrl = "https://api.vidahouse.com/designing/v1.0/Schemes/Owner?";//查询自己所有的方案url
         private string deleteSchemeUrl = "https://api.vidahouse.com/designing/v1.0/Schemes/";  //删除某个指定的方案
@@ -23,10 +23,10 @@ namespace VidaHouseManage.Controllers
         // GET: Products
         public ActionResult Index(string strOrderBy = null, string strOrder = null, string strKeyWord = null, string strView = "1", int PageIndex = 1)
         {
-            if (Session["Token"] == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (Session["Token"] == null)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             ViewBag.ViewCutInfo = strView;
             PagerInfo pager = new PagerInfo();
             pager.PageSize = PageSize;

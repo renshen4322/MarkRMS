@@ -1,9 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using VidaHouseManage.Common.Common;
 
 namespace VidaHouseManage.MvcProvider
@@ -36,7 +39,7 @@ namespace VidaHouseManage.MvcProvider
                     string LoginUrl = loginUrl + "?returnurl=" + HttpUtility.UrlEncode(filterContext.RequestContext.HttpContext.Request.Url.AbsoluteUri);
 
                     filterContext.Result = new RedirectResult(LoginUrl);
-
+                  
                     return;
                 }
                 else
@@ -47,13 +50,15 @@ namespace VidaHouseManage.MvcProvider
                         Success = false,
                         Data = loginUrl + "?returnurl=" + HttpUtility.UrlEncode(filterContext.RequestContext.HttpContext.Request.UrlReferrer.AbsoluteUri)
                     };
-
+                   
                     filterContext.Result = new JsonResult() { Data = Result };
 
                     return;
                 }
             }
         }
+
+      
 
     }
 }

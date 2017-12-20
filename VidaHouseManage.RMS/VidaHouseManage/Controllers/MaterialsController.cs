@@ -11,7 +11,7 @@ using VidaHouseManage.Service;
 
 namespace VidaHouseManage.Controllers
 {
-    public class MaterialsController : Controller
+    public class MaterialsController : BaseController
     {
         private string allMaterialUrl = "https://api.vidahouse.com/designing/v1.0/Materials?";//查询自己所有的材质url
         private string deleteMaterialUrl = "https://api.vidahouse.com/designing/v1.0/Materials/";//删除固有材质根据id
@@ -24,10 +24,10 @@ namespace VidaHouseManage.Controllers
         // GET: Products
         public ActionResult Index(string strOrderBy = null, string strCategory = "-1", string parentId = "-2", string strOrder = null, string strKeyWord = null, string strView = "1", int PageIndex = 1)
         {
-            if (Session["Token"] == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (Session["Token"] == null)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             ViewBag.ViewCutInfo = strView.Trim();
 
 

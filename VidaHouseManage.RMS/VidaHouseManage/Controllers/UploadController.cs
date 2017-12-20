@@ -10,7 +10,7 @@ using VidaHouseManage.Entity;
 
 namespace VidaHouseManage.Controllers
 {
-    public class UploadController : Controller
+    public class UploadController : BaseController
     {
         private string allUploadUrl = "https://api.vidahouse.com/designing/v1.0/Upload/Owner?";//查询所有自己的资源url
         private string deleteUploadUrl = "https://api.vidahouse.com/designing/v1.0/Upload/"; //删除固有资源根据id
@@ -18,14 +18,17 @@ namespace VidaHouseManage.Controllers
 
         private int PageSize = 12;
         private ServerRequestHelper serverHelper = new ServerRequestHelper();
-
+        private ActionResult ErrorResult(string statusMessage)
+        {
+            return Json(statusMessage, JsonRequestBehavior.AllowGet);
+        }
         // GET: Products
         public ActionResult Index(string strView = "1", int PageIndex = 1)
         {
-            if (Session["Token"] == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (Session["Token"] == null)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic = LoadDict(dic);
             ViewBag.DictInfo = dic;
